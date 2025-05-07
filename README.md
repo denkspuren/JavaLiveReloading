@@ -22,7 +22,7 @@ Es hat seinen ganz eigenen Reiz, wenn man Programme mit Grafik schreibt und Prog
 
 Diese Ideen stehen im Zentrum vieler moderner Entwicklungsumgebungen – von Scratch über Processing bis hin zu Web-Playgrounds mit JavaScript oder WebAssembly.
 
-> Eine eigene Art der Umsetzung des Live Codings verfolge ich mit dem [Live View Programming](https://github.com/denkspuren/LiveViewProgramming), die auf die Verwendung der JShell zum Coden ausgerichtet ist.
+> Eine eigene Art der Umsetzung des Live Codings verfolge ich zusammen mit [Ramon](https://github.com/RamonDevPrivate) mit dem [Live View Programming](https://github.com/denkspuren/LiveViewProgramming), die auf die Verwendung der JShell zum Coden ausgerichtet ist.
 
 Leider zeigt sich mit der Entwicklung von Java, dass die JShell bei Programmen mit Records und sealed Interfaces gelegentlich mit Fehlermeldungen aussteigt – obwohl das Programm mit `java` erfolgreich ausgeführt werden kann. Ohne die JShell geht allerdings eine gewisse Interaktivität und Explorativität verloren.
 
@@ -44,9 +44,11 @@ Es wird davon ausgegangen, dass Sie das aktuelle Java 24 JDK installiert haben.
 
 Ebenso wird davon ausgegangen, dass Sie `git` installiert haben.
 
+Der Code befindet sich in dem Repository https://github.com/denkspuren/JavaLiveReloading.
+
 ```
-git clone https://github.com/IhrUsername/java-live-reload.git
-cd java-live-reload
+git clone https://github.com/denkspuren/JavaLiveReloading.git
+cd JavaLiveReloading
 ```
 
 ## Ausprobieren
@@ -75,7 +77,7 @@ Server läuft auf http://localhost:8000
 
 6. Ändern Sie den Turtle-Code, experimentieren Sie mit der Erstellung einer eigenen Grafik.
 
-## Übersicht
+# Übersicht
 
 In dem Verzeichnis finden sich folgende, für die Programmierung bzw. Ausführung relevanten Dateien:
 
@@ -89,27 +91,26 @@ In dem Verzeichnis finden sich folgende, für die Programmierung bzw. Ausführun
 └── Turtle.java
 ```
 
-* `DevServer.java`: Ein einfacher HTTP-Server mit Server Sent Events (SSE) samit Dateiüberwachung (WatchService) einer Java-Datei. Stößt die Ausführung der Datei an, wenn sich die Datei ändert.
+➡︎ `DevServer.java`: Ein einfacher HTTP-Server mit Server Sent Events (SSE) samit Dateiüberwachung (WatchService) einer Java-Datei. Stößt die Ausführung der Datei an, wenn sich die Datei ändert.
 
-  **Aufruf**:
-  
-  ```bash
-  java DevServer.java IhreDatei.java [port] [--log]
-  ```
+**Aufruf**:
 
-  * `IhreDatei.java`: Die überwachte und auszuführende Java-Datei
-  * Optionale `port`-Angabe für den Server
-  * Optionale Logging-Ausgaben mit `--log`
+```bash
+java DevServer.java IhreDatei.java [port] [--log]
+```
 
-  Der Server gibt an, unter welcher Adresse der Webbrowser zur Betrachtung der Ausgabeergebnisse geöffnet werden muss; regulär ist das `http://localhost:8000/`
+* `IhreDatei.java`: Die überwachte und auszuführende Java-Datei
+* Optionale `port`-Angabe für den Server
+* Optionale Logging-Ausgaben mit `--log`
 
-* `index.html`: Das ist die Webseite, die der Browser anzeigt, wenn er mit `http://localhost:8000/` nach dem Server-Start aufgerufen wird. Diese Datei bindet `output.svg` und `console.log` ein, um die Ergebnisse aus diesen Dateien anzuzeigen.
+Der Server gibt nach dem Start an, unter welcher Adresse der Webbrowser zur Betrachtung der Ausgabeergebnisse geöffnet werden muss; regulär ist das `http://localhost:8000/`
 
-* `console.log`: In diese Datei protokolliert der Server die Ausgaben des Versuchs, die Java-Datei `IhreDatei.java` auszuführen.
+➡︎ `index.html`: Das ist die Webseite, die der Browser anzeigt, wenn er mit `http://localhost:8000/` nach dem Server-Start aufgerufen wird. Diese Datei bindet `output.svg` und `console.log` ein, um die Ergebnisse aus diesen Dateien anzuzeigen.
 
-* `Turtle.java`: Der Code, um Turtle-Grafiken erstellen zu können und als SVG-Datei zu speichern.
+➡︎ `console.log`: In diese Datei protokolliert der Server die Ausgaben des Versuchs, die Java-Datei `IhreDatei.java` auszuführen.
 
-* `output.svg`: Der SVG-Code wird von `Turtle.java` in diese Datei geschrieben.
+➡︎ `Turtle.java`: Der Code, um Turtle-Grafiken erstellen zu können und als SVG-Datei zu speichern.
 
-* `example.java`: Ein Beispiel zur Erstellung einer Turtle-Grafik.
+➡︎ `output.svg`: Der SVG-Code wird von `Turtle.java` in diese Datei geschrieben.
 
+➡︎ `example.java`: Ein Beispiel zur Erstellung einer Turtle-Grafik.
