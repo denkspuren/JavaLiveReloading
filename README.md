@@ -63,6 +63,8 @@ Server läuft auf http://localhost:8000
 
 Öffnen Sie die angegebene Webseite im Webbrowser.
 
+> Der Server kann mit der Tastenkombination `Crtl+C` (auf manchen Tastaturen `Strg+C`) beendet werden.
+
 **Java-Code im Editor öffnen und ändern**:
 
 1. Öffnen Sie im Editor Ihrer Wahl die Datei `example.java` und entfernen Sie beispielsweise ein Semikolon und speichern Sie das Ergebnis.
