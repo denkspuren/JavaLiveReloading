@@ -127,15 +127,15 @@ Erzeugen Sie eine neue Turtle mit
 
 ```java
 Turtle turtle = new Turtle(
-    double xFrom,    // linke Begrenzung
-    double xTo,      // rechte Begrenzung
-    double yFrom,    // untere Begrenzung
-    double yTo,      // obere Begrenzung
-    double startX,   // Start-X-Koordinate
-    double startY,   // Start-Y-Koordinate
-    double startAngle // Blickrichtung in Grad (0°=rechts, 90°=oben, gegen den Uhrzeigersinn)
+    (double) xFrom,     // linke Begrenzung
+    (double) xTo,       // rechte Begrenzung
+    (double) yFrom,     // untere Begrenzung
+    (double) yTo,       // obere Begrenzung
+    (double) startX,    // Start-X-Koordinate
+    (double) startY,    // Start-Y-Koordinate
+    (double) startAngle // Blickrichtung in Grad (0°=rechts, 90°=oben etc.)
 );
-````
+```
 
 Beispiel:
 
@@ -145,19 +145,19 @@ Turtle turtle = new Turtle(0, 200, 0, 200, 0, 0, 90);
 
 ## Zeichenbefehle
 
-| Methode                                       | Wirkung                                                                                   |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `turtle.penUp()`                              | Stift anheben – Bewegung ohne Zeichnen.                                                   |
-| `turtle.penDown()`                            | Stift absenken – Bewegung zeichnet eine Linie.                                            |
-| `turtle.forward(double distance)`             | Vorwärts bewegen um `distance` Einheiten.                                                 |
-| `turtle.backward(double distance)`            | Rückwärts bewegen (intern `forward(-distance)`).                                          |
-| `turtle.left(double angle)`                   | Drehung um `angle` Grad gegen den Uhrzeigersinn.                                          |
-| `turtle.right(double angle)`                  | Drehung um `angle` Grad im Uhrzeigersinn.                                                 |
-| `turtle.color(int r, int g, int b)`           | Setzt die Zeichenfarbe (0–255). Behält den aktuellen Alphawert bei.                       |
-| `turtle.color(int r, int g, int b, double a)` | Setzt RGBA-Farbe (RGB 0–255, Alpha 0.0–1.0).                                              |
-| `turtle.width(double w)`                      | Setzt die Strichstärke auf `w`.                                                           |
-| `turtle.push()`                               | Speichert aktuellen Zustand (Position, Winkel, Farbe, Breite, Stiftstatus) auf dem Stack. |
-| `turtle.pop()`                                | Stellt zuletzt gespeicherten Zustand wieder her.                                          |
+| Methode                                         | Wirkung                                                                                   |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `turtle.penUp()`                                | Stift anheben – Bewegung ohne Zeichnen.                                                   |
+| `turtle.penDown()`                              | Stift absenken – Bewegung zeichnet eine Linie.                                            |
+| `turtle.forward((double) distance)`             | Vorwärts bewegen um `distance` Einheiten.                                                 |
+| `turtle.backward((double) distance)`            | Rückwärts bewegen (intern `forward(-distance)`).                                          |
+| `turtle.left((double) angle)`                   | Drehung um `angle` Grad gegen den Uhrzeigersinn.                                          |
+| `turtle.right((double) angle)`                  | Drehung um `angle` Grad im Uhrzeigersinn.                                                 |
+| `turtle.color((int) r, (int) g, (int) b)`       | Setzt die Zeichenfarbe (0–255). Behält den aktuellen Alphawert bei.                       |
+| `turtle.color((int) r, (int) g, (int) b, (double) a)` | Setzt RGBA-Farbe (RGB 0–255, Alpha 0.0–1.0).                                        |
+| `turtle.width((double) w)`                      | Setzt die Strichstärke auf `w`.                                                           |
+| `turtle.push()`                                 | Speichert aktuellen Zustand (Position, Winkel, Farbe, Breite, Stiftstatus) auf dem Stack. |
+| `turtle.pop()`                                  | Stellt zuletzt gespeicherten Zustand wieder her.                                          |
 
 Alle Zeichenbefehle geben das `Turtle`-Objekt zurück, sodass Sie Methoden ketten können:
 
