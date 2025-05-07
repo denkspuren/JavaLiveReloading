@@ -116,3 +116,71 @@ Der Server gibt nach dem Start an, unter welcher Adresse der Webbrowser zur Betr
 ➡︎ `output.svg`: Der SVG-Code wird von `Turtle.java` in diese Datei geschrieben.
 
 ➡︎ `example.java`: Ein Beispiel zur Erstellung einer Turtle-Grafik.
+
+# Verwendung der Klasse `Turtle`
+
+Mit der Klasse `Turtle` können Sie Turtle-Grafiken im kartesischen Koordinatensystem erstellen und als SVG-Datei abspeichern. Die Y-Achse wird dabei korrekt invertiert (Turtle: Y↑, SVG: Y↓).
+
+## Instanziierung
+
+Erzeugen Sie eine neue Turtle mit
+
+```java
+Turtle turtle = new Turtle(
+    double xFrom,    // linke Begrenzung
+    double xTo,      // rechte Begrenzung
+    double yFrom,    // untere Begrenzung
+    double yTo,      // obere Begrenzung
+    double startX,   // Start-X-Koordinate
+    double startY,   // Start-Y-Koordinate
+    double startAngle // Blickrichtung in Grad (0°=rechts, 90°=oben, gegen den Uhrzeigersinn)
+);
+````
+
+Beispiel:
+
+```java
+Turtle turtle = new Turtle(0, 200, 0, 200, 0, 0, 90);
+```
+
+## Zeichenbefehle
+
+| Methode                                       | Wirkung                                                                                   |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `turtle.penUp()`                              | Stift anheben – Bewegung ohne Zeichnen.                                                   |
+| `turtle.penDown()`                            | Stift absenken – Bewegung zeichnet eine Linie.                                            |
+| `turtle.forward(double distance)`             | Vorwärts bewegen um `distance` Einheiten.                                                 |
+| `turtle.backward(double distance)`            | Rückwärts bewegen (intern `forward(-distance)`).                                          |
+| `turtle.left(double angle)`                   | Drehung um `angle` Grad gegen den Uhrzeigersinn.                                          |
+| `turtle.right(double angle)`                  | Drehung um `angle` Grad im Uhrzeigersinn.                                                 |
+| `turtle.color(int r, int g, int b)`           | Setzt die Zeichenfarbe (0–255). Behält den aktuellen Alphawert bei.                       |
+| `turtle.color(int r, int g, int b, double a)` | Setzt RGBA-Farbe (RGB 0–255, Alpha 0.0–1.0).                                              |
+| `turtle.width(double w)`                      | Setzt die Strichstärke auf `w`.                                                           |
+| `turtle.push()`                               | Speichert aktuellen Zustand (Position, Winkel, Farbe, Breite, Stiftstatus) auf dem Stack. |
+| `turtle.pop()`                                | Stellt zuletzt gespeicherten Zustand wieder her.                                          |
+
+Alle Zeichenbefehle geben das `Turtle`-Objekt zurück, sodass Sie Methoden ketten können:
+
+```java
+turtle.penDown()
+      .forward(100)
+      .right(90)
+      .color(0,0,255)
+      .forward(100);
+```
+
+## Grafik speichern
+
+Nach dem Zeichnen speichern Sie die Grafik als SVG:
+
+```java
+turtle.save("meineGrafik.svg");
+```
+
+Oder mit Standardnamen `output.svg`:
+
+```java
+turtle.save();
+```
+
+Damit haben Sie alle notwendigen Befehle, um eine Turtle-Grafik zu erstellen, zu gestalten und als SVG-Datei abzulegen. Viel Erfolg!
