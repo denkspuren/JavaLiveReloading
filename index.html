@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Live SVG Preview</title>
+  <style>
+    body { margin: 20px; font-family: sans-serif; }
+    #status { text-align: center; margin-bottom: 10px; }
+    #timeline { width: 100%; margin: 20px 0; }
+    /* Wrapper nur für das SVG */
+    #svgWrapper {
+      max-width: 100%;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 10px;
+      text-align: center;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    #consoleLog {
+      white-space: pre-wrap;
+      background: #f8f8f8;
+      padding: 10px;
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Live SVG Preview</h1>
+  <div id="status">
+    Linien sichtbar: <span id="currentLine">0</span> / <span id="totalLines">0</span>
+  </div>
+
+  <input type="range" id="timeline" min="0" max="0" value="0">
+
+  <!-- SVG-Wrapper ohne den Button -->
+  <div id="svgWrapper">
+    <div id="svgContainer"></div>
+  </div>
+
+  <pre id="consoleLog">Lade Konsole...</pre>
+
+  <script>
+    async function loadSVG() {
+      const res = await fetch('output.svg', { cache: 'no-cache' });
+      const svgText = await res.text();
+      const container = document.getElementById('svgContainer');
+      container.innerHTML = svgText;
+      return container.querySelector('svg');
+    }
+
+    let svgElement, lineIds = [];
+    const slider = document.getElementById('timeline');
+    const statusCurrent = document.getElementById('currentLine');
+    const statusTotal   = document.getElementById('totalLines');
+    const logArea       = document.getElementById('consoleLog');
+
+    async function initialize() {
+      svgElement = await loadSVG();
+      lineIds = Array.from(svgElement.querySelectorAll('[id]')).map(el => el.id);
+      statusTotal.textContent = lineIds.length;
+      slider.max = lineIds.length;
+      slider.value = lineIds.length;
+      slider.oninput = () => {
+        const n = +slider.value;
+        statusCurrent.textContent = n;
+        lineIds.forEach((id,i) => {
+          const el = document.getElementById(id);
+          if (el) el.style.display = i < n ? '' : 'none';
+        });
+      };
+      slider.dispatchEvent(new Event('input'));
+      updateLog();
+    }
+
+    async function updateLog() {
+      try {
+        const res = await fetch('console.log', { cache: 'no-cache' });
+        logArea.textContent = await res.text();
+      } catch (e) {
+        logArea.textContent = 'Fehler beim Laden der Konsole.';
+      }
+    }
+
+    const evtSource = new EventSource('/events');
+    evtSource.onmessage = async () => {
+      console.log('SSE: Reload SVG & Log');
+      await initialize();
+    };
+    evtSource.onerror = err => console.error('SSE-Fehler:', err);
+
+    window.addEventListener('DOMContentLoaded', initialize);
+  </script>
+</body>
+</html>
+
