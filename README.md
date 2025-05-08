@@ -58,7 +58,7 @@ cd JavaLiveReloading
 Achten Sie unter Windows darauf, dass Ihnen durch die Autovervollständigung aus `example.java` kein `.\example.java` gemacht wird. Dann funktioniert die Dateiüberwachung nicht mehr. 
 
 ```
-% java DevServer.java example.java --log
+java DevServer.java example.java --log
 Watching example.java…
 Server läuft auf http://localhost:8000
 ```
