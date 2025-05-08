@@ -55,10 +55,15 @@ cd JavaLiveReloading
 
 **Server starten**:
 
-Achten Sie unter Windows darauf, dass Ihnen durch die Autovervollständigung aus `example.java` kein `.\example.java` gemacht wird. Dann funktioniert die Dateiüberwachung nicht mehr. 
+Achten Sie unter Windows darauf, dass Ihnen durch die Autovervollständigung aus `example.java` kein `.\example.java` gemacht wird. Dann funktioniert die Dateiüberwachung nicht mehr. Rufen Sie den Server wie folgt auf: 
 
 ```
 java DevServer.java example.java --log
+```
+
+Auf der Konsole ist zu sehen:
+
+```
 Watching example.java…
 Server läuft auf http://localhost:8000
 ```
